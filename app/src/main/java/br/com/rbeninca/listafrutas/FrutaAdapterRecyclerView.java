@@ -69,6 +69,5 @@ class FrutaAdapterRecyclerView extends RecyclerView.Adapter<FrutaAdapterRecycler
             imgView = itemView.findViewById(R.id.imageView);
         }
     }
-
 }
 

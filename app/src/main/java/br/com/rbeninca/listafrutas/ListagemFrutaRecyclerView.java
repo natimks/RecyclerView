@@ -1,12 +1,16 @@
 package br.com.rbeninca.listafrutas;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ListagemFrutaRecycleView extends AppCompatActivity {
+public class ListagemFrutaRecyclerView extends AppCompatActivity {
     FrutaController frutaController;
     RecyclerView recyclerView;
 
@@ -29,5 +33,26 @@ public class ListagemFrutaRecycleView extends AppCompatActivity {
         );
 
         recyclerView.setAdapter(frutaAdapterRecyclerView);
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(
+                getApplicationContext(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(getApplicationContext(), ExibirFruta.class);
+                intent.putExtra("id", position);
+                startActivity(intent);
+                Toast.makeText(getApplicationContext(), frutaController.FRUTAS[position].getNome(), Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+
+            }
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+        }
+        ));
     }
 }
